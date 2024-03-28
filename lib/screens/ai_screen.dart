@@ -370,7 +370,10 @@ class _AIScreenState extends State<AIScreen> {
             ),
             actions: [
               ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
+                },
                 child: const Text("취소"),
               ),
               ElevatedButton(
@@ -381,8 +384,9 @@ class _AIScreenState extends State<AIScreen> {
                     log += ":  ${txtController.text} ml";
                     measureLog.add(log);
                     txtController.clear();
-                    Navigator.of(context).pop();
                   });
+                  Navigator.of(context).pop();
+                  FocusScope.of(context).unfocus();
                 },
                 child: const Text("측정"),
               ),
