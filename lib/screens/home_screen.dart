@@ -9,6 +9,7 @@ import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:ble_uart/utils/parsing_ac_gy.dart';
 import 'package:ble_uart/utils/parsing_measured.dart';
+import 'package:ble_uart/widgets/graph_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -1091,8 +1092,14 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
                         const SliverToBoxAdapter(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 30, bottom: 10, top: 30,),
-                            child: Text("Measured Time", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                            padding: EdgeInsets.only(left: 25, bottom: 10, top: 30,),
+                            child: Row(
+                              children: [
+                                Icon(Icons.book, size: 28,),
+                                SizedBox(width: 5,),
+                                Text("Measured Time", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                              ],
+                            ),
                           ),
                         ),
 
@@ -1161,15 +1168,35 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                           ),
                         ),
 
-                        SliverToBoxAdapter(  // 단일 위젯은 요걸로
-                          child: Container(
-                            height: 500.0,
-                            color: Colors.blueGrey,
-                            child: const Center(
-                              child: Text("Some Start Widgets"),
+                        const SliverToBoxAdapter(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 30, top: 30,),
+                            child: Row(
+                              children: [
+                                Icon(Icons.auto_graph_rounded, size: 28,),
+                                SizedBox(width: 5,),
+                                Text("Measured Level", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                              ],
                             ),
                           ),
                         ),
+
+                        const SliverToBoxAdapter(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 10.0, bottom: 20,),
+                            child: GraphWidget(),
+                          ),
+                        ),
+
+                        // SliverToBoxAdapter(  // 단일 위젯은 요걸로
+                        //   child: Container(
+                        //     height: 500.0,
+                        //     color: Colors.blueGrey,
+                        //     child: const Center(
+                        //       child: Text("Some Start Widgets"),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
