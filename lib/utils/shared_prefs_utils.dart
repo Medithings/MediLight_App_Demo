@@ -26,6 +26,10 @@ class SharedPrefsUtil{
   String get patchName => _sharedPrefs?.getString("patchName") ?? "";
   String get remoteId => _sharedPrefs?.getString("remoteId") ?? "";
 
+  // level (used in home, ai, staff mode, and tbd)
+  bool get hasSetMaxLevel => _sharedPrefs?.containsKey("maxLevel") ?? false;
+  int get maxLevel => _sharedPrefs?.getInt("maxLevel") ?? 8;
+
   // catheter
   set catheter(bool x) => _sharedPrefs?.setBool("catheter", x);
   set totalC(int x) => _sharedPrefs?.setInt("totalC", x);
@@ -38,6 +42,9 @@ class SharedPrefsUtil{
   // home
   set patchName(String x) => _sharedPrefs?.setString("patchName", x);
   set remoteId(String x) => _sharedPrefs?.setString("remoteId", x);
+
+  // level (used in home, ai, staff mode, and tbd)
+  set maxLevel(int x) => _sharedPrefs?.setInt("maxLevel", x);
 
   void removeCatheterSP(){
     print("remove catheter");

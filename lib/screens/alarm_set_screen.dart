@@ -163,12 +163,15 @@ class _AlarmSetScreenState extends State<AlarmSetScreen> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            AlarmShortcutButton(refreshAlarms: loadAlarms),
-            FloatingActionButton(
-              onPressed: () => navigateToAlarmScreen(null),
-              child: const Icon(Icons.alarm_add_rounded, size: 33),
+            // AlarmShortcutButton(refreshAlarms: loadAlarms),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0, right: 8),
+              child: FloatingActionButton(
+                onPressed: () => navigateToAlarmScreen(null),
+                child: const Icon(Icons.alarm_add_rounded, size: 33),
+              ),
             ),
           ],
         ),

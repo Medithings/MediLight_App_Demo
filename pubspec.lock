@@ -4,10 +4,11 @@ packages:
   alarm:
     dependency: "direct main"
     description:
-      name: alarm
-      sha256: d9bc3304e14fdcf3744dee7eb852f5019c4b119f231028abaf6adde4877d373f
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: main
+      resolved-ref: "0c4871fe52c4de7693d817e0c2c95c700348038f"
+      url: "https://github.com/Medithings/alarm_fork.git"
+    source: git
     version: "3.0.14"
   archive:
     dependency: transitive

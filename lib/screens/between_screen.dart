@@ -51,11 +51,11 @@ class _BetweenScreenState extends State<BetweenScreen> {
     // TODO: implement initState
     Background.stopFlutterBackgroundService();
 
-    if(Platform.isAndroid){
-      AlarmStorage.init();
-      loadAlarms();
-      subscription ??= Alarm.ringStream.stream.listen((alarmSettings) => navigateToRingScreen(alarmSettings), );
-    }
+    // if(Platform.isAndroid){
+    //   AlarmStorage.init();
+    //   loadAlarms();
+    //   subscription ??= Alarm.ringStream.stream.listen((alarmSettings) => navigateToRingScreen(alarmSettings), );
+    // }
 
     onScan();
 

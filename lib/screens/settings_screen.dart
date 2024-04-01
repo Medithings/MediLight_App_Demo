@@ -1,4 +1,5 @@
 import 'package:ble_uart/screens/alarm_set_screen.dart';
+import 'package:ble_uart/screens/passcode_screen.dart';
 import 'package:ble_uart/screens/patch_info_screen.dart';
 import 'package:ble_uart/screens/uart_screen.dart';
 import 'package:ble_uart/widgets/settings_tile.dart';
@@ -121,11 +122,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   Container(
                     decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
-                      )
+                        border: Border(
+                          top: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
+                        )
                     ),
-                    child: const SettingsTile(stIcon: Icons.notifications_rounded, title: "Alarm", goto: AlarmSetScreen(), bgColor: Colors.redAccent,),
+                    child: const SettingsTile(stIcon: Icons.info, title: "Patch info", goto: PatchInfoScreen(), bgColor: Colors.blueAccent,),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 56.0),
@@ -133,29 +134,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
-                      )
+                        border: Border(
+                          bottom: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
+                        )
                     ),
-                    child: const SettingsTile(stIcon: Icons.rocket_launch_rounded, title: "UART MODE", goto: UARTScreen(), bgColor: Colors.grey,),
+                    child: const SettingsTile(stIcon: Icons.accessibility, title: "STAFF MODE", goto: PasscodeScreen(), bgColor: Colors.red,),
                   ),
                 ],
               ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 20,),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  top: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
-                  bottom: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
-                ),
-              ),
-              child: const SettingsTile(stIcon: Icons.info, title: "Patch info", goto: PatchInfoScreen(), bgColor: Colors.blueAccent,),
             ),
           ),
         ],
