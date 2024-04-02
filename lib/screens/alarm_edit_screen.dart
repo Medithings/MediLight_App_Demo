@@ -150,10 +150,6 @@ class _AlarmEditScreenState extends State<AlarmEditScreen> {
               ),
             ],
           ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text("Shortcuts", style: TextStyle(fontSize: 24,),),
-          ),
           Text(
             getDay(),
             style: Theme.of(context)

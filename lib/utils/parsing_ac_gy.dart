@@ -25,6 +25,7 @@ void ParsingAcGy(String getETimeStamp, String acgy) async{
   gyrZ = int.parse(splitting[5].trim());
 
   print("ParsingAcGy: getETimeStamp = $getETimeStamp\neTimeStamp = $eTimeStamp");
+  print("[ParsingAcGy] $accX, $accY, $accZ, $gyrX, $gyrY, $gyrZ");
 
   await model.insertingACGY(ACGY(
     eTimeStamp: eTimeStamp,

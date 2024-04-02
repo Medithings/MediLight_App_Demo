@@ -1,4 +1,5 @@
 import 'package:ble_uart/screens/ai_screen.dart';
+import 'package:ble_uart/screens/database_screen.dart';
 import 'package:ble_uart/screens/threshold_setting_screen.dart';
 import 'package:ble_uart/screens/uart_screen.dart';
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
@@ -58,6 +59,8 @@ class _StaffScreenState extends State<StaffScreen> {
                 bgColor: Colors.grey,
                 info: spu.hasSetMaxLevel? "$maxLevel" : "Not set yet"),
           ),
+          const SizedBox(height: 10,),
+          const SettingsTile(stIcon: Icons.sd_storage_rounded, title: "Database", goto: DatabaseScreen(), bgColor: Colors.grey,),
         ],
       ),
     );

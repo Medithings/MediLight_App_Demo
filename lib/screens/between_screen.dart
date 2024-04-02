@@ -51,11 +51,11 @@ class _BetweenScreenState extends State<BetweenScreen> {
     // TODO: implement initState
     Background.stopFlutterBackgroundService();
 
-    // if(Platform.isAndroid){
-    //   AlarmStorage.init();
-    //   loadAlarms();
-    //   subscription ??= Alarm.ringStream.stream.listen((alarmSettings) => navigateToRingScreen(alarmSettings), );
-    // }
+    if(Platform.isAndroid){
+      AlarmStorage.init();
+      loadAlarms();
+      subscription ??= Alarm.ringStream.stream.listen((alarmSettings) => navigateToRingScreen(alarmSettings), );
+    }
 
     onScan();
 
@@ -123,6 +123,7 @@ class _BetweenScreenState extends State<BetweenScreen> {
   void dispose() {
     // TODO: implement dispose
     _scanResultsSubscription.cancel();
+    subscription?.cancel();
     super.dispose();
   }
 
@@ -198,6 +199,7 @@ class _BetweenScreenState extends State<BetweenScreen> {
   }
 
   void goHome(){
+    subscription?.cancel();
     Navigator.pushReplacement(context, route);
   }
 
