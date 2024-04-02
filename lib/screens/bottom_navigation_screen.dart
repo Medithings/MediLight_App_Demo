@@ -46,11 +46,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
     print("[alarm_set_screen] load alarm done");
 
-    subscription ??= Alarm.ringStream.stream.listen((alarmSettings){
-      print("GG");
-      // sendEmail();
-      navigateToRingScreen(alarmSettings);
-    });
+    if(!Alarm.ringStream.hasListener){
+      subscription ??= Alarm.ringStream.stream.listen((alarmSettings){
+        print("GG");
+        // sendEmail();
+        navigateToRingScreen(alarmSettings);
+      });
+    }
   }
 
   Future<void> sendEmail() async {
@@ -115,6 +117,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               AlarmAlertScreen(alarmSettings: alarmSettings),
         ));
     loadAlarms();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    subscription?.cancel();
+    super.dispose();
   }
 
   final List<Widget> _widgetOptions = <Widget>[

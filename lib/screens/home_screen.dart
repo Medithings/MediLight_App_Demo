@@ -530,7 +530,10 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
               print("[HomeScreen] checking() Tj: patchState $patchState");
             }
             tjmsg.add(msgString);
+
             if(tjmsg.length % 24 == 0 && tjmsg.isNotEmpty){
+
+              timeStampForDBETC = DateFormat("yyyy/MM/dd/HH/mm/ss/SSS").format(DateTime.now()).toString();
 
               ParsingMeasured(timeStampForDBETC, tjmsg);
               if(kDebugMode){

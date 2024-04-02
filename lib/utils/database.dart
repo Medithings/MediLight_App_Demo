@@ -100,7 +100,7 @@ class DatabaseModel{
     ''');
     // TODO: indexing LEDNUM
 
-    db.execute('''
+    db.execute(''' 
     CREATE TABLE etc(
       eTimeStamp TEXT,
       acc_x INTEGER,
@@ -176,6 +176,7 @@ class DatabaseModel{
 
   Future<void> insertTemperature(TemperatureValues item) async{
     var db = await database;
+    print("insertTemperature: ${item.eTimeStamp}, ${item.temperature}");
 
     await db.rawInsert(
       "INSERT INTO etc(eTimeStamp, temper) VALUES(${item.eTimeStamp}, ${item.temperature})"
@@ -185,18 +186,22 @@ class DatabaseModel{
   Future<void> insertingACGY(ACGY item) async{
     var db = await database;
 
-    print("inserintACGY: item.eTimeStamp = ${item.eTimeStamp}");
-    await db.rawUpdate(
-      "UPDATE etc SET eTimestamp = ?, acc_x = ?, acc_y = ?, acc_z = ?, gyr_x = ?, gyr_y = ?, gyr_z = ? WHERE eTimeStamp = ?",
-      ['${item.eTimeStamp}, ${item.accX}, ${item.accY}, ${item.accZ}, ${item.gyrX}, ${item.gyrY}, ${item.gyrZ}, ${item.eTimeStamp}']
-    );
+    print("insertingACGY: item.eTimeStamp = ${item.eTimeStamp}");
+    // await db.rawUpdate(
+    //   "UPDATE etc SET eTimestamp = ?, acc_x = ?, acc_y = ?, acc_z = ?, gyr_x = ?, gyr_y = ?, gyr_z = ? WHERE eTimeStamp = ?",
+    //   ['${item.eTimeStamp}, ${item.accX}, ${item.accY}, ${item.accZ}, ${item.gyrX}, ${item.gyrY}, ${item.gyrZ}, ${item.eTimeStamp}']
+    // );
     await db.update(
       "etc",
+      where: "eTimeStamp = ${item.eTimeStamp}",
       {
         "eTimeStamp" : "${item.eTimeStamp}",
         "acc_x" : "${item.accX}",
         "acc_y" : "${item.accY}",
         "acc_z" : "${item.accZ}",
+        "gyr_x" : "${item.gyrX}",
+        "gyr_y" : "${item.gyrY}",
+        "gyr_z" : "${item.gyrZ}"
       },
     );
   }
