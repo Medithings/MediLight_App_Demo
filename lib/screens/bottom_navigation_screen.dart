@@ -40,50 +40,16 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     super.initState();
     if (Alarm.android) {
       checkAndroidNotificationPermission();
+      checkAndroidScheduleExactAlarmPermission();
     }
 
     loadAlarms();
 
+    subscription ??= Alarm.ringStream.stream.listen((alarmSettings) => navigateToRingScreen(alarmSettings),);
+
     print("[alarm_set_screen] load alarm done");
 
-    if(!Alarm.ringStream.hasListener){
-      subscription ??= Alarm.ringStream.stream.listen((alarmSettings){
-        print("GG");
-        // sendEmail();
-        navigateToRingScreen(alarmSettings);
-      });
-    }
-  }
 
-  Future<void> sendEmail() async {
-    String? guardian;
-
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    userName = pref.getString("name") ?? "No name";
-    guardian = pref.getString("guardianEmail");
-
-    if(guardian == "") guardian = "medilightalert@gmail.com";
-
-    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'origin': 'http://localhost',
-      },
-      body: json.encode({
-        'service_id': 'service_3gzs5mj',
-        'template_id': 'template_h9e6z72',
-        'user_id': 'DpL6M9GiRBZFBI1bh',
-        'accessToken': '1-6LZXIKob51cgNkHjbmt',
-        'template_params': {
-          'user_name': userName,
-          'send_to': guardian,
-        },
-      }),
-    );
-
-    print(response.body);
   }
 
   Future<void> checkAndroidNotificationPermission() async {
@@ -93,6 +59,18 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       final res = await Permission.notification.request();
       alarmPrint(
         'Notification permission ${res.isGranted ? '' : 'not'} granted.',
+      );
+    }
+  }
+
+  Future<void> checkAndroidScheduleExactAlarmPermission() async {
+    final status = await Permission.scheduleExactAlarm.status;
+    alarmPrint('Schedule exact alarm permission: $status.');
+    if (status.isDenied) {
+      alarmPrint('Requesting schedule exact alarm permission...');
+      final res = await Permission.scheduleExactAlarm.request();
+      alarmPrint(
+        'Schedule exact alarm permission ${res.isGranted ? '' : 'not'} granted.',
       );
     }
   }
@@ -137,7 +115,6 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   Widget build(BuildContext context) {
     Background.startFlutterBackgroundService(() async{
       Background.connectToDevice();
-      Background.alarmSendEmail();
     });
     return Scaffold(
       body: SafeArea(
