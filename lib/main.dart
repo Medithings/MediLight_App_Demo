@@ -1,15 +1,9 @@
-// Copyright 2017-2023, Charles Weinberger & Paul DeMarco.
-// All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'dart:async';
 
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/screens/alarm_alert_screen.dart';
 import 'package:ble_uart/screens/between_screen.dart';
 import 'package:ble_uart/screens/onboarding_screen.dart';
-import 'package:ble_uart/utils/back_ground_service.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
 import 'package:ble_uart/utils/database.dart';
@@ -17,8 +11,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/bluetooth_off_screen.dart';
@@ -35,7 +27,7 @@ Future<void> main() async{
   print("db get database");
   await db.database;
 
-  KakaoSdk.init(nativeAppKey: '5334e091dd18acc59eeaffac5c5f5959'); // kako native appp
+  // KakaoSdk.init(nativeAppKey: '5334e091dd18acc59eeaffac5c5f5959'); // kako native appp
   FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true); // Log level 을 verbose 로 설정, syntax color on
 
   runApp(
