@@ -51,12 +51,6 @@ class _BetweenScreenState extends State<BetweenScreen> {
     // TODO: implement initState
     Background.stopFlutterBackgroundService();
 
-    if(Platform.isAndroid){
-      AlarmStorage.init();
-      loadAlarms();
-      subscription ??= Alarm.ringStream.stream.listen((alarmSettings) => navigateToRingScreen(alarmSettings), );
-    }
-
     onScan();
 
     _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) { // Scan result 를 listen
@@ -95,28 +89,6 @@ class _BetweenScreenState extends State<BetweenScreen> {
       }
     });
     super.initState();
-  }
-
-  Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              AlarmAlertScreen(alarmSettings: alarmSettings),
-        ));
-    loadAlarms();
-  }
-
-  void loadAlarms() {
-    setState(() {
-      print("[alarm_set_screen] load alarms start");
-      try{
-        alarms = Alarm.getAlarms();
-        alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
-      }catch(e){
-        print("[alarm_set_screen] no saved alarms");
-      }
-    });
   }
 
   @override
@@ -199,7 +171,6 @@ class _BetweenScreenState extends State<BetweenScreen> {
   }
 
   void goHome(){
-    subscription?.cancel();
     Navigator.pushReplacement(context, route);
   }
 

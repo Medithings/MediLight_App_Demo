@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
+import 'package:ble_uart/utils/local_notification.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -118,7 +119,6 @@ void onStart(ServiceInstance service) async {
   StreamSubscription? streamSubscription;
   BluetoothDevice? gBleDevice;
   List<BluetoothService> gBleServices = <BluetoothService>[];
-  StreamSubscription? subscription;
   StreamSubscription? subscriptionConnection;
   List<String> receivedDataList = <String>[];
   // String sendCharacteristicUuid = "";
@@ -267,9 +267,11 @@ void onStart(ServiceInstance service) async {
                     //    reconnect, or just call connect() again right now
                     // 2. you must always re-discover services after disconnection!
                     debugPrint("${gBleDevice?.platformName} is disconnected");
-                    subscription!.cancel();
-                    scanningMethod();
                     subscriptionConnection!.cancel();
+
+                    // TODO: NOTIFICATION (Patch has been disconnected. Open the app to re-connect
+                    LocalNotification.init();
+                    LocalNotification.showNotification("${gBleDevice?.platformName} is disconnected", "Open the app to re-connect");
                   }
                 });
               });
@@ -284,35 +286,6 @@ void onStart(ServiceInstance service) async {
   if (connectToDevice.isNotEmpty && Platform.isAndroid) {
     scanningMethod();
   }
-
-  StreamSubscription<AlarmSettings>? alarmSubscription;
-  SharedPreferences _pref = await SharedPreferences.getInstance();
-  String userName = _pref.getString("name") ?? "No name";
-  String guardian = _pref.getString("guardianEmail") ?? "";
-
-  alarmSubscription ??= Alarm.ringStream.stream.listen((alarmSettings) async {
-    if(guardian == "") guardian = "isaac.lim@medithings.co.kr";
-
-    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'origin': 'http://localhost',
-      },
-      body: json.encode({
-        'service_id': 'service_3gzs5mj',
-        'template_id': 'template_h9e6z72',
-        'user_id': 'DpL6M9GiRBZFBI1bh',
-        'accessToken': '1-6LZXIKob51cgNkHjbmt',
-        'template_params': {
-          'user_name': userName,
-          'send_to': guardian,
-        },
-      }),
-    );
-    print(response.body);
-  });
 
   // bring to foreground
   Timer.periodic(const Duration(seconds: 30), (timer) async {
@@ -407,28 +380,18 @@ class Background {
     }
   }
 
-  static Future<void> alarmSendEmail() async{
-    if(Platform.isAndroid){
-      await initializeService();
-    }else{
-      print("Go");
-      await _channel.invokeMethod('letsGo');
-    }
-  }
-
 
   // This method will write data on specific characteristic
   static Future<void> connectToDevice() async {
 
-    SharedPreferences getMethodsCall = await SharedPreferences.getInstance();
-    await getMethodsCall.reload();
-
-    String deviceName = getMethodsCall.getString("patchName") as String;
+    String deviceName="";
     String serviceUuid = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 
     if(Platform.isAndroid){
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      await preferences.reload();
+      await preferences.reload().then((_){
+        deviceName = preferences.getString("patchName") as String;
+      });
       final log = preferences.getStringList('connectToDevice') ?? <String>[];
       log.clear();
       log.add("connectToDevice");

@@ -36,6 +36,7 @@ class _AlarmSetScreenState extends State<AlarmSetScreen> {
 
     if (Alarm.android) {
       checkAndroidNotificationPermission();
+      checkAndroidExternalStoragePermission();
     }
 
     AlarmStorage.init();

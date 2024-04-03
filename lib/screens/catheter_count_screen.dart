@@ -282,6 +282,7 @@ IF you have changed your date, then simply just enter your status again.
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text("Catheter Counting"),
         centerTitle: false,
         actions: [

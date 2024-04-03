@@ -38,6 +38,11 @@ class _FirstConnectScreenState extends State<FirstConnectScreen> {
   @override
   void initState() {
     super.initState();
+    getPref();
+  }
+
+  void getPref() async{
+    pref = await SharedPreferences.getInstance();
   }
 
   @override
@@ -179,7 +184,6 @@ class _FirstConnectScreenState extends State<FirstConnectScreen> {
   }
 
   Future setSPRemoteId(String remoteId) async{
-    pref = await SharedPreferences.getInstance();
     pref.setString('remoteId', remoteId);
     if(kDebugMode){
       print("[FirstConnectScreen] remoteId: $remoteId saved");
