@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../widgets/account_settings_tile.dart';
+import '../../widgets/account_settings_tile.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});

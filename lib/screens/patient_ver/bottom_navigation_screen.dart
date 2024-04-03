@@ -1,23 +1,15 @@
-
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
-
-import 'package:ble_uart/screens/alarm_set_screen.dart';
-import 'package:ble_uart/screens/catheter_count_screen.dart';
-import 'package:ble_uart/screens/home_screen.dart';
-import 'package:ble_uart/screens/settings_screen.dart';
+import 'package:ble_uart/screens/patient_ver/alarm_set_screen.dart';
+import 'package:ble_uart/screens/patient_ver/catheter_count_screen.dart';
+import 'package:ble_uart/screens/patient_ver/home_screen.dart';
+import 'package:ble_uart/screens/patient_ver/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../utils/back_ground_service.dart';
+import '../../utils/back_ground_service.dart';
 import 'alarm_alert_screen.dart';
-
 
 GlobalKey bottomNavGKey = GlobalKey(debugLabel: 'bottomNavGKey');
 late String userName;

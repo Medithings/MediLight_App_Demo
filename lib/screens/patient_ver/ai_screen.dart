@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:ble_uart/screens/between_screen.dart';
-import 'package:ble_uart/screens/bottom_navigation_screen.dart';
+import 'package:ble_uart/screens/patient_ver/between_screen.dart';
+import 'package:ble_uart/screens/patient_ver/bottom_navigation_screen.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:ble_uart/utils/parsing_agc.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,8 +11,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../utils/ble_info_provider.dart';
+import '../../utils/ble_info_provider.dart';
 
 class AIScreen extends StatefulWidget {
   const AIScreen({super.key});

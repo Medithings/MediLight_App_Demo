@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'bottom_navigation_screen.dart';
 
 class TrainingScreen extends StatefulWidget {

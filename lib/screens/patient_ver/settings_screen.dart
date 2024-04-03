@@ -1,12 +1,9 @@
-import 'package:ble_uart/screens/alarm_set_screen.dart';
-import 'package:ble_uart/screens/passcode_screen.dart';
-import 'package:ble_uart/screens/patch_info_screen.dart';
-import 'package:ble_uart/screens/uart_screen.dart';
+import 'package:ble_uart/screens/patient_ver/passcode_screen.dart';
+import 'package:ble_uart/screens/patient_ver/patch_info_screen.dart';
 import 'package:ble_uart/widgets/settings_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'account_screen.dart';

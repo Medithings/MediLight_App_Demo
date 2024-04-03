@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/screens/between_screen.dart';
+import 'package:ble_uart/screens/patient_ver/between_screen.dart';
 import 'package:ble_uart/screens/onboarding_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
@@ -12,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
-
-import 'screens/bluetooth_off_screen.dart';
+import 'screens/patient_ver/bluetooth_off_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  // TODO : when it is guardian, there should be some change
   await Alarm.init(showDebugLogs: true);
   await SharedPrefsUtil().init();
   print("db = DatabaseModel");
@@ -35,7 +34,7 @@ Future<void> main() async{
       providers: [
         ChangeNotifierProvider(create: (_)=> BLEInfoProvider()),
       ],
-      child: const FlutterBlueApp(),
+      child: const MediLightApp(),
     ),
   );
 }
@@ -44,14 +43,14 @@ Future<void> main() async{
 // This widget shows BluetoothOffScreen or
 // ScanScreen depending on the adapter state
 //
-class FlutterBlueApp extends StatefulWidget {
-  const FlutterBlueApp({Key? key}) : super(key: key);
+class MediLightApp extends StatefulWidget {
+  const MediLightApp({Key? key}) : super(key: key);
 
   @override
-  State<FlutterBlueApp> createState() => _FlutterBlueAppState();
+  State<MediLightApp> createState() => _MediLightAppState();
 }
 
-class _FlutterBlueAppState extends State<FlutterBlueApp> {
+class _MediLightAppState extends State<MediLightApp> {
   BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown; // state unknown for IOS
   bool registered = false;
   String name = "";
@@ -76,21 +75,7 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
         setState(() {});
       }
     });
-
-    // AlarmStorage.init();
-    // loadAlarms();
-    //
-    // subscription ??= Alarm.ringStream.stream.listen((alarmSettings)
-    //   => navigateToRingScreen(alarmSettings),
-    // );
-
-    // if (Alarm.android) {
-    //   checkAndroidNotificationPermission();
-    // }
-
   }
-
-
 
   @override
   void dispose() { // subscription cancel
