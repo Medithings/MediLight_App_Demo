@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
-
-import 'package:ble_uart/screens/between_screen.dart';
-import 'package:ble_uart/utils/back_ground_service.dart';
+import 'package:ble_uart/screens/patient_ver/between_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:ble_uart/utils/parsing_ac_gy.dart';
@@ -14,16 +10,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-
-import '../utils/parsing_temperature.dart';
-import '../utils/shared_prefs_utils.dart';
-import '../utils/database.dart';
+import '../../utils/parsing_temperature.dart';
+import '../../utils/shared_prefs_utils.dart';
+import '../../utils/database.dart';
 
 final pageBucket = PageStorageBucket();
 

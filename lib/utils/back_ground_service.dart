@@ -17,7 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-import '../screens/alarm_alert_screen.dart';
+import '../screens/patient_ver/alarm_alert_screen.dart';
 
 late SharedPreferences _pref;
 String remoteIdSaved="";

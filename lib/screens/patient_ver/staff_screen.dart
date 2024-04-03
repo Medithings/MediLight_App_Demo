@@ -1,14 +1,12 @@
-import 'package:ble_uart/screens/ai_screen.dart';
-import 'package:ble_uart/screens/database_screen.dart';
-import 'package:ble_uart/screens/threshold_setting_screen.dart';
-import 'package:ble_uart/screens/uart_screen.dart';
+import 'package:ble_uart/screens/patient_ver/ai_screen.dart';
+import 'package:ble_uart/screens/patient_ver/database_screen.dart';
+import 'package:ble_uart/screens/patient_ver/threshold_setting_screen.dart';
+import 'package:ble_uart/screens/patient_ver/uart_screen.dart';
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
 import 'package:ble_uart/widgets/account_settings_tile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/settings_tile.dart';
+import '../../widgets/settings_tile.dart';
 
 class StaffScreen extends StatefulWidget {
   const StaffScreen({super.key});

@@ -1,7 +1,5 @@
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 const List<Widget> levels = <Widget>[
   Text("Lv. 3", style: TextStyle(fontSize: 20),),
