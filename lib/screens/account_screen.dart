@@ -17,7 +17,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   late SharedPreferences pref;
   late String accountName="";
-  late String guardianEmail="";
+  // late String guardianEmail="";
   late String age="";
   late String weight="";
   late String height="";
@@ -56,10 +56,10 @@ class _AccountScreenState extends State<AccountScreen> {
     if(which == "gender") {
       matchTitle = "Modify your gender";
     }
-    if(which == "guardian") {
-      matchTitle = "Modify your guardian's email";
-      matchLabel = "Guardian's email ex) abc@def.com";
-    }
+    // if(which == "guardian") {
+    //   matchTitle = "Modify your guardian's email";
+    //   matchLabel = "Guardian's email ex) abc@def.com";
+    // }
 
       showDialog(
       context: context,
@@ -73,20 +73,20 @@ class _AccountScreenState extends State<AccountScreen> {
 
           content:
           SizedBox(
-            height: which == "guardian" ? 120:80,
+            height: 80,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                which == "guardian"?
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("[ Current guardian's email address ]"),
-                        Text(guardianEmail, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                        const SizedBox(height: 10,),
-                      ],
-                    )
-                    : Container(),
+                // which == "guardian"?
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: [
+                //         const Text("[ Current guardian's email address ]"),
+                //         Text(guardianEmail, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                //         const SizedBox(height: 10,),
+                //       ],
+                //     )
+                //     : Container(),
                 which != "gender"?
                 TextField(
                   keyboardType: which == "name" || which == "guardian"? TextInputType.text : TextInputType.number,
@@ -117,7 +117,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 if(which == "age") pref.setString("age", txtController.text);
                 if(which == "height") pref.setString("height", txtController.text);
                 if(which == "weight") pref.setString("weight", txtController.text);
-                if(which == "guardian") pref.setString("guardianEmail", txtController.text);
+                // if(which == "guardian") pref.setString("guardianEmail", txtController.text);
 
                 if(which == "gender") {
                   if(gender == "f"){
@@ -150,11 +150,11 @@ class _AccountScreenState extends State<AccountScreen> {
           accountName = "No name";
         }
 
-        if(pref.getString("guardianEmail") != null){
-          guardianEmail = pref.getString("guardianEmail")!;
-        } else {
-          guardianEmail = "guardian not registered";
-        }
+        // if(pref.getString("guardianEmail") != null){
+        //   guardianEmail = pref.getString("guardianEmail")!;
+        // } else {
+        //   guardianEmail = "guardian not registered";
+        // }
 
         if(pref.getString("age") != null){
           age = pref.getString("age")!;
@@ -293,21 +293,21 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
               const SizedBox(height: 20,),
-              InkWell(
-                onTap: (){
-                  _changeAlert("guardian");
-                },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
-                      bottom: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
-                    ),
-                  ),
-                  child: AccountSettingsTile(stIcon: Icons.email, title: "Guardian Email", bgColor: Colors.grey, info: "",),
-                ),
-              ),
+              // InkWell(
+              //   onTap: (){
+              //     _changeAlert("guardian");
+              //   },
+              //   child: Container(
+              //     decoration: const BoxDecoration(
+              //       color: Colors.white,
+              //       border: Border(
+              //         top: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
+              //         bottom: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
+              //       ),
+              //     ),
+              //     child: AccountSettingsTile(stIcon: Icons.email, title: "Guardian Email", bgColor: Colors.grey, info: "",),
+              //   ),
+              // ),
             ],
           ),
         ),
