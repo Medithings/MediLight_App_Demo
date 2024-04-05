@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/screens/patient_ver/between_screen.dart';
-import 'package:ble_uart/screens/onboarding_screen.dart';
+import 'package:ble_uart/versions//patient_ver/between_screen.dart';
+import 'package:ble_uart/versions//onboarding_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
 import 'package:ble_uart/utils/database.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
-import 'screens/patient_ver/bluetooth_off_screen.dart';
+import 'versions/patient_ver/bluetooth_off_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async{

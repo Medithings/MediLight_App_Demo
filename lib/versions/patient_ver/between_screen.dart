@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/screens/patient_ver/bottom_navigation_screen.dart';
+import 'package:ble_uart/versions//patient_ver/bottom_navigation_screen.dart';
 import 'package:ble_uart/utils/back_ground_service.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:flutter/foundation.dart';

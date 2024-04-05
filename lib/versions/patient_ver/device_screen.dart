@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:ble_uart/screens/patient_ver/uart_screen.dart';
+import 'package:ble_uart/versions//patient_ver/uart_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
