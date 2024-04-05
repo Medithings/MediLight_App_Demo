@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:ble_uart/screens/patient_ver/between_screen.dart';
+import 'package:ble_uart/versions//patient_ver/between_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:ble_uart/utils/parsing_ac_gy.dart';

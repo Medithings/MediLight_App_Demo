@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:ble_uart/screens/patient_ver/ai_screen.dart';
+import 'package:ble_uart/versions//patient_ver/ai_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:flutter/foundation.dart';

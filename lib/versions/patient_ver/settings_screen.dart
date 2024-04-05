@@ -1,5 +1,5 @@
-import 'package:ble_uart/screens/patient_ver/passcode_screen.dart';
-import 'package:ble_uart/screens/patient_ver/patch_info_screen.dart';
+import 'package:ble_uart/versions//patient_ver/passcode_screen.dart';
+import 'package:ble_uart/versions//patient_ver/patch_info_screen.dart';
 import 'package:ble_uart/widgets/settings_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

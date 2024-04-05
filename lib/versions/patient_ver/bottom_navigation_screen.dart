@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/screens/patient_ver/alarm_set_screen.dart';
-import 'package:ble_uart/screens/patient_ver/catheter_count_screen.dart';
-import 'package:ble_uart/screens/patient_ver/home_screen.dart';
-import 'package:ble_uart/screens/patient_ver/settings_screen.dart';
+import 'package:ble_uart/versions//patient_ver/alarm_set_screen.dart';
+import 'package:ble_uart/versions//patient_ver/catheter_count_screen.dart';
+import 'package:ble_uart/versions//patient_ver/home_screen.dart';
+import 'package:ble_uart/versions//patient_ver/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';

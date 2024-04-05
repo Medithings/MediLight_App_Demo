@@ -15,9 +15,6 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
 
   final totalControl = TextEditingController();
   final todayDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-  final FocusNode totalTextFocus = FocusNode();
-  final FocusNode receiveTextFocus = FocusNode();
-  final FocusNode endTextFocus = FocusNode();
   late DateTime endDate = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
   late DateTime? savedDate;
 
@@ -260,13 +257,18 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
             title: const Text("[How To Use]"),
             content: const Text(
               """
-If you use one Catheter then press button 1 Used.
-If you want to modify total number of catheter,
-then just simply press the number.
-              
-** Caution **
-When you change your date, then the calculation will be wrong.
-IF you have changed your date, then simply just enter your status again.
+❗️ INITIAL SETTING
+1️⃣ Press the '0' which is located in the middle of the screen.
+2️⃣ Enter the total number of catheters and the due date for them.
+(until when do you plan to use the catheters)
+
+🥳 Now you're ready to use!
+
+❗️ HOW TO USE
+   *  Simply press '1 Used' when you use your catheter.
+   *  If you want to modify total number of catheter by pressing the
+   number which is located in the middle of the screen.
+   *  You can also see the status of the catheter in Home page.
               """,
               style: TextStyle(fontSize: 20,),
             ),

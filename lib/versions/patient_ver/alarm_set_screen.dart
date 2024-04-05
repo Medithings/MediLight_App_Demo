@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
 import 'package:alarm/service/alarm_storage.dart';
-import 'package:ble_uart/screens/patient_ver/alarm_alert_screen.dart';
+import 'package:ble_uart/versions//patient_ver/alarm_alert_screen.dart';
 import 'package:ble_uart/widgets/alarm_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
