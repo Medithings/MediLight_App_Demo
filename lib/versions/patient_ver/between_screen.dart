@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/versions//patient_ver/bottom_navigation_screen.dart';
+import 'package:ble_uart/versions/patient_ver/bottom_navigation_screen.dart';
 import 'package:ble_uart/utils/back_ground_service.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:flutter/foundation.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../utils/ble_info_provider.dart';
+import '../../../utils/ble_info_provider.dart';
 
 class BetweenScreen extends StatefulWidget {
   const BetweenScreen({super.key});

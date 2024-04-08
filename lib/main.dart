@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
-import 'package:ble_uart/versions//patient_ver/between_screen.dart';
-import 'package:ble_uart/versions//onboarding_screen.dart';
+import 'package:ble_uart/versions/patient_ver/between_screen.dart';
+import 'package:ble_uart/versions/onboarding_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/shared_prefs_utils.dart';
 import 'package:ble_uart/utils/database.dart';

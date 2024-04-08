@@ -14,9 +14,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import '../../utils/parsing_temperature.dart';
-import '../../utils/shared_prefs_utils.dart';
-import '../../utils/database.dart';
+import '../../../utils/parsing_temperature.dart';
+import '../../../utils/shared_prefs_utils.dart';
+import '../../../utils/database.dart';
 
 final pageBucket = PageStorageBucket();
 

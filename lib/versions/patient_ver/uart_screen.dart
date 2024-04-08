@@ -8,7 +8,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-import '../../utils/snackbar.dart';
+import '../../../utils/snackbar.dart';
 
 /*
 TODO: UART communication
