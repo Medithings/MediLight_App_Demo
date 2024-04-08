@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:ble_uart/versions//patient_ver/ai_screen.dart';
+import 'package:ble_uart/versions/patient_ver/ai_screen.dart';
 import 'package:ble_uart/utils/ble_info_provider.dart';
 import 'package:ble_uart/utils/extra.dart';
 import 'package:flutter/foundation.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../widgets/scan_result_tile.dart';
+import '../../../widgets/scan_result_tile.dart';
 
 class FirstConnectScreen extends StatefulWidget {
   const FirstConnectScreen({super.key});

@@ -1,13 +1,13 @@
 import 'dart:async';
-import 'package:ble_uart/versions//patient_ver/uart_screen.dart';
+import 'package:ble_uart/versions/patient_ver/uart_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import '../../widgets/service_tile.dart';
-import '../../widgets/characteristic_tile.dart';
-import '../../widgets/descriptor_tile.dart';
-import '../../utils/snackbar.dart';
-import '../../utils/extra.dart';
+import '../../../widgets/service_tile.dart';
+import '../../../widgets/characteristic_tile.dart';
+import '../../../widgets/descriptor_tile.dart';
+import '../../../utils/snackbar.dart';
+import '../../../utils/extra.dart';
 
 class DeviceScreen extends StatefulWidget {
   final BluetoothDevice device;
