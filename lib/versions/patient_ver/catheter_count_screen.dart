@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:intl/intl.dart';
 import '../../../utils/shared_prefs_utils.dart';
@@ -255,8 +258,9 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             title: const Text("[How To Use]"),
-            content: const Text(
-              """
+            content: const SingleChildScrollView(
+              child: Text(
+                """
 ❗️ INITIAL SETTING
 1️⃣ Press the '0' which is located in the middle of the screen.
 2️⃣ Enter the total number of catheters and the due date for them.
@@ -270,7 +274,8 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
    number which is located in the middle of the screen.
    *  You can also see the status of the catheter in Home page.
               """,
-              style: TextStyle(fontSize: 20,),
+                style: TextStyle(fontSize: 20,),
+              ),
             ),
           );
         }
@@ -282,10 +287,18 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
     print("start build");
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text("Catheter Counting"),
         centerTitle: false,
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+        shape: const Border(
+          bottom: BorderSide(
+            color: Colors.grey,
+            width: 0.5,
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -293,29 +306,34 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 30,),
-            const Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child:  Text("Per day", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
-                ),
-              ],
+            const Spacer(flex: 1,),
+            SizedBox(
+              height: 155,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: _setTotal,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: Text("$dayPer", style: const TextStyle(fontSize: 140, fontWeight: FontWeight.bold),),
+                  ),
+                  const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20.0),
+                      child: Text("/ day", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+                ],
+              ),
             ),
-
-            const SizedBox(height: 10,),
-            InkWell(
-              onTap: _setTotal,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              child: Text("$dayPer", style: const TextStyle(fontSize: 150, fontWeight: FontWeight.bold),),
-            ),
-
-            const SizedBox(height: 20,),
+            const SizedBox(height: 50,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -367,50 +385,58 @@ class _CatheterCountScreenState extends State<CatheterCountScreen> {
               ],
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10, top: 100,),
-              child: Row(
-                children: [
-                  const Text("Total Catheter", style: TextStyle(fontSize: 18,),),
-                  const Spacer(flex: 1,),
-                  yesNo? Text("${pref.totalC} / ${pref.initialC}", style: const TextStyle(fontSize: 18,),) : const Text("Empty", style: TextStyle(fontSize: 18,),),
-                ],
-              ),
+            const Spacer(flex: 1,),
+
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10, top: 100,),
+                  child: Row(
+                    children: [
+                      const Text("Total Catheter", style: TextStyle(fontSize: 18,),),
+                      const Spacer(flex: 1,),
+                      yesNo? Text("${pref.totalC} / ${pref.initialC}", style: const TextStyle(fontSize: 18,),) : const Text("Empty", style: TextStyle(fontSize: 18,),),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10,),
+                  child: Row(
+                    children: [
+                      const Text("Daily Status", style: TextStyle(fontSize: 18,),),
+                      const Spacer(flex: 1,),
+                      yesNo? Text("${pref.per} / ${pref.initPer}", style: const TextStyle(fontSize: 18,),) : const Text("Empty", style: TextStyle(fontSize: 18,),),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10,),
+                  child: Row(
+                    children: [
+                      const Text("Due Date", style: TextStyle(fontSize: 18,),),
+                      const Spacer(flex: 1,),
+                      yesNo? Text("${pref.endDate[0]}${pref.endDate[1]}${pref.endDate[2]}${pref.endDate[3]} / ${pref.endDate[4]}${pref.endDate[5]} / ${pref.endDate[6]}${pref.endDate[7]}", style: const TextStyle(fontSize: 18,),)
+                          : const Text("Empty", style: TextStyle(fontSize: 18,),),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30,),
+                  child: Row(
+                    children: [
+                      const Text("D-day", style: TextStyle(fontSize: 18,),),
+                      const Spacer(flex: 1,),
+                      yesNo?
+                      endDate != todayDate? Text("D-${endDate.difference(todayDate).inDays + 1}", style: const TextStyle(fontSize: 18,),)
+                          : const Text("D-DAY", style: TextStyle(fontSize: 18,),)
+                          : const Text("Empty", style: TextStyle(fontSize: 18,),),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10,),
-              child: Row(
-                children: [
-                  const Text("Daily Status", style: TextStyle(fontSize: 18,),),
-                  const Spacer(flex: 1,),
-                  yesNo? Text("${pref.per} / ${pref.initPer}", style: const TextStyle(fontSize: 18,),) : const Text("Empty", style: TextStyle(fontSize: 18,),),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10,),
-              child: Row(
-                children: [
-                  const Text("Due Date", style: TextStyle(fontSize: 18,),),
-                  const Spacer(flex: 1,),
-                  yesNo? Text("${pref.endDate[0]}${pref.endDate[1]}${pref.endDate[2]}${pref.endDate[3]} / ${pref.endDate[4]}${pref.endDate[5]} / ${pref.endDate[6]}${pref.endDate[7]}", style: const TextStyle(fontSize: 18,),)
-                      : const Text("Empty", style: TextStyle(fontSize: 18,),),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30,),
-              child: Row(
-                children: [
-                  const Text("D-day", style: TextStyle(fontSize: 18,),),
-                  const Spacer(flex: 1,),
-                  yesNo?
-                  endDate != todayDate? Text("D-${endDate.difference(todayDate).inDays + 1}", style: const TextStyle(fontSize: 18,),)
-                      : const Text("D-DAY", style: TextStyle(fontSize: 18,),)
-                      : const Text("Empty", style: TextStyle(fontSize: 18,),),
-                ],
-              ),
-            ),
+
+            const SizedBox(height: 20,),
           ],
         ),
       ),

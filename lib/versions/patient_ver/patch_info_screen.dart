@@ -21,77 +21,77 @@ class _PatchInfoScreenState extends State<PatchInfoScreen> {
   static const String rx = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"; // write data to the rx characteristic to send it to the UART interface.
   static const String tx = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"; // Enable notifications for the tx characteristic to receive data from the application.
 
-  late BluetoothDevice device;
-  late BluetoothService service;
-
-  int idx_tx = 1;
-  int idx_rx = 0;
-
-  List<String> msg = [];
-
-  late StreamSubscription<List<int>> _lastValueSubscription;
-  late List<BluetoothCharacteristic> characteristic;
+  // late BluetoothDevice device;
+  // late BluetoothService service;
+  //
+  // int idx_tx = 1;
+  // int idx_rx = 0;
+  //
+  // List<String> msg = [];
+  //
+  // late StreamSubscription<List<int>> _lastValueSubscription;
+  // late List<BluetoothCharacteristic> characteristic;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    device = context.read<BLEInfoProvider>().device;
-    service = context.read<BLEInfoProvider>().service;
-    characteristic = context.read<BLEInfoProvider>().service.characteristics;
-
-    switch (characteristic.first.uuid.toString().toUpperCase()){
-      case rx: idx_tx = 1; idx_rx = 0;
-      if (kDebugMode) {
-        print("rx = ${characteristic[idx_rx].uuid.toString().toUpperCase()}\ntx = ${characteristic[idx_tx].uuid.toString().toUpperCase()}");
-      }
-      break;
-      case tx: idx_tx = 0; idx_rx = 1;
-      if (kDebugMode) {
-        print("rx = ${characteristic[idx_rx].uuid.toString().toUpperCase()}\ntx = ${characteristic[idx_tx].uuid.toString().toUpperCase()}");
-      }
-      break;
-      default:
-        if (kDebugMode) {
-          print("characteristic doesn't match any");
-        }
-        Navigator.pop(context);
-        break;
-    }
-
-    characteristic[idx_tx].setNotifyValue(true);
-    if (kDebugMode) {
-      print("tx = ${characteristic[idx_tx].uuid.toString().toUpperCase()}\nset notify");
-    }
-
-    _lastValueSubscription = characteristic[idx_tx].lastValueStream.listen((value) {
-      String convertedStr = utf8.decode(value).trimRight();
-
-      if(utf8.decode(value).trim() != ""){
-        msg.insert(0, convertedStr);
-      }
-
-      if(convertedStr.contains("Tr")){
-        device.disconnect();
-        Navigator.of(context).pop();
-      }
-
-      if (mounted) {
-        setState(() {});
-      }
-    });
+    // device = context.read<BLEInfoProvider>().device;
+    // service = context.read<BLEInfoProvider>().service;
+    // characteristic = context.read<BLEInfoProvider>().service.characteristics;
+    //
+    // switch (characteristic.first.uuid.toString().toUpperCase()){
+    //   case rx: idx_tx = 1; idx_rx = 0;
+    //   if (kDebugMode) {
+    //     print("rx = ${characteristic[idx_rx].uuid.toString().toUpperCase()}\ntx = ${characteristic[idx_tx].uuid.toString().toUpperCase()}");
+    //   }
+    //   break;
+    //   case tx: idx_tx = 0; idx_rx = 1;
+    //   if (kDebugMode) {
+    //     print("rx = ${characteristic[idx_rx].uuid.toString().toUpperCase()}\ntx = ${characteristic[idx_tx].uuid.toString().toUpperCase()}");
+    //   }
+    //   break;
+    //   default:
+    //     if (kDebugMode) {
+    //       print("characteristic doesn't match any");
+    //     }
+    //     Navigator.pop(context);
+    //     break;
+    // }
+    //
+    // characteristic[idx_tx].setNotifyValue(true);
+    // if (kDebugMode) {
+    //   print("tx = ${characteristic[idx_tx].uuid.toString().toUpperCase()}\nset notify");
+    // }
+    //
+    // _lastValueSubscription = characteristic[idx_tx].lastValueStream.listen((value) {
+    //   String convertedStr = utf8.decode(value).trimRight();
+    //
+    //   if(utf8.decode(value).trim() != ""){
+    //     msg.insert(0, convertedStr);
+    //   }
+    //
+    //   if(convertedStr.contains("Tr")){
+    //     device.disconnect();
+    //     Navigator.of(context).pop();
+    //   }
+    //
+    //   if (mounted) {
+    //     setState(() {});
+    //   }
+    // });
   }
 
-  Future resetCmdWrite() async {
-    try {
-      String resetCmd = "Sr\r";
-      await characteristic[idx_rx].write(utf8.encode(resetCmd), withoutResponse: characteristic[idx_rx].properties.writeWithoutResponse);
-    } catch (e) {
-      if(kDebugMode){
-        print(e);
-      }
-    }
-  }
+  // Future resetCmdWrite() async {
+  //   try {
+  //     String resetCmd = "Sr\r";
+  //     await characteristic[idx_rx].write(utf8.encode(resetCmd), withoutResponse: characteristic[idx_rx].properties.writeWithoutResponse);
+  //   } catch (e) {
+  //     if(kDebugMode){
+  //       print(e);
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -133,8 +133,8 @@ class _PatchInfoScreenState extends State<PatchInfoScreen> {
                 bottom: BorderSide(color: Color.fromRGBO(225, 225, 225, 1),),
               ),
             ),
-            child: PatchInfoTile(
-              info: device.platformName,
+            child: const PatchInfoTile(
+              info: "Bladder 01",
               title: "Patch name",
             ),
           ),
@@ -158,7 +158,7 @@ class _PatchInfoScreenState extends State<PatchInfoScreen> {
                       children: [
                         InkWell(
                           onTap: (){
-                            resetCmdWrite();
+
                           },
                           child: Container(
                             height: 70,

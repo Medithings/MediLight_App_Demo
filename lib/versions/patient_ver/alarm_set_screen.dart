@@ -130,7 +130,19 @@ class _AlarmSetScreenState extends State<AlarmSetScreen> {
     loadAlarms();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Alarms')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text('Alarms',),
+        centerTitle: false,
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+        shape: const Border(
+          bottom: BorderSide(
+            color: Colors.grey,
+            width: 0.5,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: alarms.isNotEmpty
             ? ListView.separated(

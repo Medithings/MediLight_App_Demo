@@ -18,20 +18,13 @@ class FirstConnectScreen extends StatefulWidget {
 }
 
 class _FirstConnectScreenState extends State<FirstConnectScreen> {
-  final List<ScanResult> _scanResults = []; // FBP에서 제공하는 것 (ScanResult)
-  bool _isScanning = false; // 초기값 false
-  late StreamSubscription<List<ScanResult>> _scanResultsSubscription; // Stream으로 받아오는 scan result list
-  late StreamSubscription<bool> _isScanningSubscription; // Stream으로 bool 값을 가지는 state
 
-  final BluetoothConnectionState _connectionState = BluetoothConnectionState.disconnected;
-  late StreamSubscription<BluetoothConnectionState> _connectionStateSubscription;
-
-  final List<BluetoothService> _services = [];
-
-  late Route route;
+  final Route route = MaterialPageRoute(builder: (context) => const AIScreen());
   late SharedPreferences pref;
 
-  final String suid = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"; // nordic uart service uuid
+  bool scanBool = false;
+
+
 
   @override
   void initState() {
@@ -43,97 +36,97 @@ class _FirstConnectScreenState extends State<FirstConnectScreen> {
     pref = await SharedPreferences.getInstance();
   }
 
-  @override
-  void didChangeDependencies(){
-    super.didChangeDependencies();
-    onScan();
-
-    _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) { // Scan result 를 listen
-      // before : _scanResults = results
-
-      // after : 이름에 Bladder 또는 Medi가 있을 때 Scan result에 저장
-      _scanResults.clear();
-
-      for (var element in results) {
-        if(element.device.platformName.contains("Bladder") || element.device.platformName.contains("MEDi")){
-          if(_scanResults.indexWhere((x) => x.device.remoteId == element.device.remoteId) < 0){
-            _scanResults.add(element);
-            pref.setString("patchName", element.device.platformName);
-          }
-        }
-      }
-
-      if (mounted) { // mounted 가 true 일 때 setState 를 해주는 것이 올바름
-        setState(() {}); // set state
-      }
-
-    }, onError: (e) { // 에러 발생 시
-      if(kDebugMode){
-        print("[FirstConnectScreen] something went wrong while scanning on the initial state\nError: $e");
-      }
-    });
-
-    _isScanningSubscription = FlutterBluePlus.isScanning.listen((state) { // is scanning 을 listen
-      _isScanning = state; // listen 해서 받아온 state 를 _isScanning 에 복사
-      if (mounted) { // mounted?
-        setState(() {}); // set state
-      }
-    });
-  }
+  // @override
+  // void didChangeDependencies(){
+  //   super.didChangeDependencies();
+  //   onScan();
+  //
+  //   _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) { // Scan result 를 listen
+  //     // before : _scanResults = results
+  //
+  //     // after : 이름에 Bladder 또는 Medi가 있을 때 Scan result에 저장
+  //     _scanResults.clear();
+  //
+  //     for (var element in results) {
+  //       if(element.device.platformName.contains("Bladder") || element.device.platformName.contains("MEDi")){
+  //         if(_scanResults.indexWhere((x) => x.device.remoteId == element.device.remoteId) < 0){
+  //           _scanResults.add(element);
+  //           pref.setString("patchName", element.device.platformName);
+  //         }
+  //       }
+  //     }
+  //
+  //     if (mounted) { // mounted 가 true 일 때 setState 를 해주는 것이 올바름
+  //       setState(() {}); // set state
+  //     }
+  //
+  //   }, onError: (e) { // 에러 발생 시
+  //     if(kDebugMode){
+  //       print("[FirstConnectScreen] something went wrong while scanning on the initial state\nError: $e");
+  //     }
+  //   });
+  //
+  //   _isScanningSubscription = FlutterBluePlus.isScanning.listen((state) { // is scanning 을 listen
+  //     _isScanning = state; // listen 해서 받아온 state 를 _isScanning 에 복사
+  //     if (mounted) { // mounted?
+  //       setState(() {}); // set state
+  //     }
+  //   });
+  // }
 
   @override
   void dispose() { // dispose 하면 모든 subscription (listen 하는 것) 중지
-    _scanResultsSubscription.cancel();
-    _isScanningSubscription.cancel();
+    // _scanResultsSubscription.cancel();
+    // _isScanningSubscription.cancel();
     super.dispose();
   }
 
-  Future onScan() async { // Scan button pressed
-    try {
-    } catch (e) {
-      if(kDebugMode){
-        print("[FirstConnectScreen] something went wrong while onScan-systemDevices is done\nError: $e");
-      }
-    }
-    try {
-      // android is slow when asking for all advertisements,
-      // so instead we only ask for 1/8 of them
-      int divisor = Platform.isAndroid ? 8 : 1;
-      _scanResults.clear();
-      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5), continuousUpdates: true, continuousDivisor: divisor);
-    } catch (e) {
-      if(kDebugMode){
-        print("[FirstConnectScreen] something went wrong while onScan-startScan is done\nError: $e");
-      }
-    }
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future onScan() async { // Scan button pressed
+  //   try {
+  //   } catch (e) {
+  //     if(kDebugMode){
+  //       print("[FirstConnectScreen] something went wrong while onScan-systemDevices is done\nError: $e");
+  //     }
+  //   }
+  //   try {
+  //     // android is slow when asking for all advertisements,
+  //     // so instead we only ask for 1/8 of them
+  //     int divisor = Platform.isAndroid ? 8 : 1;
+  //     _scanResults.clear();
+  //     await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5), continuousUpdates: true, continuousDivisor: divisor);
+  //   } catch (e) {
+  //     if(kDebugMode){
+  //       print("[FirstConnectScreen] something went wrong while onScan-startScan is done\nError: $e");
+  //     }
+  //   }
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future onStopPressed() async {
-    try {
-      FlutterBluePlus.stopScan();
-    } catch (e) {
-      if (kDebugMode) {
-        print("[FirstConnectScreen] something went wrong while onStopPressed-stopScan is done\nError: $e");
-      }
-    }
-  }
-
-  void onConnectPressed(BluetoothDevice device) async{
-    try{
-      await device.connectAndUpdateStream();
-      if (kDebugMode) {
-        print("[FirstConnectScreen] onConnectPressed - device: ${device.platformName}");
-      }
-      storingDevice(device);
-      setSPRemoteId(device.remoteId.str);
-    }catch(e){
-      if (kDebugMode) {
-        print("[FirstConnectScreen] something went wrong while onConnectPressed-connectAndUpdateStream is done\nError: $e");
-      }
-    }
+  // Future onStopPressed() async {
+  //   try {
+  //     FlutterBluePlus.stopScan();
+  //   } catch (e) {
+  //     if (kDebugMode) {
+  //       print("[FirstConnectScreen] something went wrong while onStopPressed-stopScan is done\nError: $e");
+  //     }
+  //   }
+  // }
+  //
+  // void onConnectPressed(BluetoothDevice device) async{
+  //   try{
+  //     await device.connectAndUpdateStream();
+  //     if (kDebugMode) {
+  //       print("[FirstConnectScreen] onConnectPressed - device: ${device.platformName}");
+  //     }
+  //     storingDevice(device);
+  //     setSPRemoteId(device.remoteId.str);
+  //   }catch(e){
+  //     if (kDebugMode) {
+  //       print("[FirstConnectScreen] something went wrong while onConnectPressed-connectAndUpdateStream is done\nError: $e");
+  //     }
+  //   }
 
     // try{
     //   await device.connect(mtu: null, autoConnect: true);
@@ -142,102 +135,146 @@ class _FirstConnectScreenState extends State<FirstConnectScreen> {
     //     print("[FirstConnectScreen] something went wrong while onConnectPressed-connect is done\nError: $e");
     //   }
     // }
+  //
+  //   try{
+  //     for(var element in await device.discoverServices()){
+  //       if(element.uuid.toString().toUpperCase() == suid){
+  //         _services.add(element);
+  //         storingService(element);
+  //       }
+  //     }
+  //     if(kDebugMode){
+  //       print("[FirstConnectScreen] onConnectPressed - service uuid : ${_services.first.uuid.toString().toUpperCase()}");
+  //     }
+  //   }catch(e){
+  //     if(kDebugMode){
+  //       print("[FirstConnectScreen] something went wrong while onConnectPressed-discoverService is done\nError: $e");
+  //     }
+  //   }
+  //
+  //   // TODO: device_screen에서 함수 불러오고 shared preferences의 registered를 true
+  //   route = MaterialPageRoute(builder: (context) => const AIScreen());
+  //
+  //   // pref = await SharedPreferences.getInstance();
+  //   // pref.setBool('registered', true);
+  //   Future.delayed(Duration.zero,(){
+  //     goAI();
+  //   });
+  // }
 
-    try{
-      for(var element in await device.discoverServices()){
-        if(element.uuid.toString().toUpperCase() == suid){
-          _services.add(element);
-          storingService(element);
-        }
-      }
-      if(kDebugMode){
-        print("[FirstConnectScreen] onConnectPressed - service uuid : ${_services.first.uuid.toString().toUpperCase()}");
-      }
-    }catch(e){
-      if(kDebugMode){
-        print("[FirstConnectScreen] something went wrong while onConnectPressed-discoverService is done\nError: $e");
-      }
-    }
-
-    // TODO: device_screen에서 함수 불러오고 shared preferences의 registered를 true
-    route = MaterialPageRoute(builder: (context) => const AIScreen());
-
-    // pref = await SharedPreferences.getInstance();
-    // pref.setBool('registered', true);
-    Future.delayed(Duration.zero,(){
-      goAI();
-    });
-  }
-
-  void storingService(BluetoothService s){
-    context.read<BLEInfoProvider>().service = s;
-  }
-
-  void storingDevice(BluetoothDevice d){
-    context.read<BLEInfoProvider>().device = d;
-  }
+  // void storingService(BluetoothService s){
+  //   context.read<BLEInfoProvider>().service = s;
+  // }
+  //
+  // void storingDevice(BluetoothDevice d){
+  //   context.read<BLEInfoProvider>().device = d;
+  // }
 
   void goAI(){
-    Navigator.pushReplacement(context, route);
+     Navigator.pushReplacement(context, route);
   }
 
-  Future setSPRemoteId(String remoteId) async{
-    pref.setString('remoteId', remoteId);
-    if(kDebugMode){
-      print("[FirstConnectScreen] remoteId: $remoteId saved");
-    }
-  }
+  // Future setSPRemoteId(String remoteId) async{
+  //   pref.setString('remoteId', remoteId);
+  //   if(kDebugMode){
+  //     print("[FirstConnectScreen] remoteId: $remoteId saved");
+  //   }
+  // }
+
+  // Widget buildScanButton(BuildContext context) {
+  //   if (FlutterBluePlus.isScanningNow) {
+  //     return FloatingActionButton(
+  //       onPressed: onStopPressed,
+  //       backgroundColor: Colors.red,
+  //       child: const Icon(Icons.stop),
+  //     );
+  //   } else {
+  //     return FloatingActionButton(
+  //       onPressed: onScan,
+  //       child: const Text("SCAN"),
+  //     );
+  //   }
+  // }
 
   Widget buildScanButton(BuildContext context) {
-    if (FlutterBluePlus.isScanningNow) {
+    if (scanBool) {
       return FloatingActionButton(
-        onPressed: onStopPressed,
+        onPressed: () {
+          setState(() async {
+            await Future.delayed(const Duration(seconds: 2), (){
+              setState(() {
+                scanBool = false;
+              });
+            });
+          });
+        },
         backgroundColor: Colors.red,
         child: const Icon(Icons.stop),
       );
     } else {
       return FloatingActionButton(
-        onPressed: onScan,
+        onPressed: (){
+          setState(() {
+            scanBool = true;
+          });
+        },
         child: const Text("SCAN"),
       );
     }
   }
 
-  Future onRefresh() {
-    if (_isScanning == false) {
-      FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
-    }
-    if (mounted) {
-      setState(() {});
-    }
-    return Future.delayed(const Duration(milliseconds: 500));
-  }
+  // Future onRefresh() {
+  //   if (_isScanning == false) {
+  //     FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
+  //   }
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  //   return Future.delayed(const Duration(milliseconds: 500));
+  // }
 
-  List<Widget> _buildScanResultTiles(BuildContext context) {
-    return _scanResults
-        .map(
-          (r) => ScanResultTile(
-        result: r,
-        onTap: () => onConnectPressed(r.device),
-      ),
-    )
-        .toList();
-  }
+  // List<Widget> _buildScanResultTiles(BuildContext context) {
+  //   return _scanResults
+  //       .map(
+  //         (r) => ScanResultTile(
+  //       result: r,
+  //       onTap: () => goAI,
+  //     ),
+  //   )
+  //       .toList();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Finding Devices'),
+        centerTitle: true,
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
       ),
-      body: RefreshIndicator(
-        onRefresh: onRefresh,
-        child: ListView(
-          children: <Widget>[
-            // no need system devices
-            // ..._buildSystemDeviceTiles(context),
-            ..._buildScanResultTiles(context),
-          ],
-        ),
+      body: ListView(
+        children: <Widget>[
+          // no need system devices
+          // ..._buildSystemDeviceTiles(context),
+          // ..._buildScanResultTiles(context),
+          const SizedBox(height: 50,),
+          InkWell(
+            onTap: (){
+              Navigator.pushReplacement(context, route);
+            },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 30,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 50,),
+                  Text("Bladder 01", style: TextStyle(fontSize: 15,),),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
       floatingActionButton: buildScanButton(context),
     );

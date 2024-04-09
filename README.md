@@ -1,4 +1,4 @@
-# MediLight_App
+# MediLight_App Demo version
 MediLight mobile application
 
 - BLE communication

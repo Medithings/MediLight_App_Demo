@@ -74,24 +74,29 @@ class _RegisterFormFieldState extends State<RegisterFormField> {
   void _confirmDialogue(){
     showDialog(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
       builder: (BuildContext context){
         return AlertDialog(
+          scrollable: true,
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           title: const Text("Confirm your input data"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Name: $name"),
-              Text("Age: $age"),
-              Text("Height: $height"),
-              Text("Weight: $weight"),
-              Text("Gender: $gender"),
-              // Text("Guardian: ${guardian? guardianEmail: guardianInformString[1]}"),
-            ],
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.12,
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Name: $name"),
+                Text("Age: $age"),
+                Text("Height: $height"),
+                Text("Weight: $weight"),
+                Text("Gender: $gender"),
+                // Text("Guardian: ${guardian? guardianEmail: guardianInformString[1]}"),
+              ],
+            ),
           ),
           actions: [
             ElevatedButton(

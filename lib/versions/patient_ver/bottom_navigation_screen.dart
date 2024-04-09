@@ -105,24 +105,31 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Background.startFlutterBackgroundService(() async{
-      Background.connectToDevice();
-    });
     return Scaffold(
       body: SafeArea(
         child: _widgetOptions.elementAt(_currentIndex),
       ),
-      bottomNavigationBar: SalomonBottomBar(
-        key: bottomNavGKey,
-        backgroundColor: Colors.white,
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
-        items: [
-          SalomonBottomBarItem(icon: const Icon(Icons.home), title: const Text("Home"), selectedColor: Colors.blueGrey),
-          SalomonBottomBarItem(icon: const Icon(Icons.check_box_outlined), title: const Text("Catheter"), selectedColor: Colors.pinkAccent),
-          SalomonBottomBarItem(icon: const Icon(Icons.notifications_rounded), title: const Text("Alarm"), selectedColor: Colors.orange),
-          SalomonBottomBarItem(icon: const Icon(Icons.settings), title: const Text("Settings"), selectedColor: Colors.deepPurpleAccent),
-        ],
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(width: 1.0, color: Color(0xffe0e0e0)),
+          ),
+        ),
+        height: MediaQuery.of(context).size.height * 0.13,
+        child: SalomonBottomBar(
+          itemPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04, vertical: MediaQuery.of(context).size.height * 0.02),
+          margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.025, vertical: MediaQuery.of(context).size.height * 0.02),
+          key: bottomNavGKey,
+          // backgroundColor: const Color(0xffF4F4F4),
+          currentIndex: _currentIndex,
+          onTap: (i) => setState(() => _currentIndex = i),
+          items: [
+            SalomonBottomBarItem(icon: const Icon(Icons.home), title: const Text("Home"), selectedColor: Colors.blueGrey),
+            SalomonBottomBarItem(icon: const Icon(Icons.check_box_outlined), title: const Text("Catheter"), selectedColor: Colors.pinkAccent),
+            SalomonBottomBarItem(icon: const Icon(Icons.notifications_rounded), title: const Text("Alarm"), selectedColor: Colors.orange),
+            SalomonBottomBarItem(icon: const Icon(Icons.settings), title: const Text("Settings"), selectedColor: Colors.deepPurpleAccent),
+          ],
+        ),
       ),
     );
   }

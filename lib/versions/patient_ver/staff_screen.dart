@@ -43,9 +43,9 @@ class _StaffScreenState extends State<StaffScreen> {
       ),
       body: Column(
         children: [
-          const SettingsTile(stIcon: Icons.info, title: "UART MODE", goto: UARTScreen(), bgColor: Colors.blueAccent,),
+          const SettingsTile(stIcon: Icons.info, title: "UART MODE", goto: ThresholdSettingScreen(), bgColor: Colors.blueAccent,),
           const SizedBox(height: 10,),
-          const SettingsTile(stIcon: Icons.rocket, title: "AI Re-training", goto: AIScreen(), bgColor: Colors.red,),
+          const SettingsTile(stIcon: Icons.rocket, title: "AI Re-training", goto: ThresholdSettingScreen(), bgColor: Colors.red,),
           const SizedBox(height: 10,),
           InkWell(
             onTap: (){
